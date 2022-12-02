@@ -31,9 +31,18 @@ class SearchFieldDropdown extends Component {
         <h2>dropdown here</h2>
         <select value={this.state.value} onChange={this.handleChange}>
             <option disabled={true} value="">select search field</option>
-            <option value="0">a select</option>
-            <option value="1">b select</option>
-            <option value="2">b select</option>
+            <option value="0">First Name</option>
+            <option value="1">Last Name</option>
+            <option value="2">Company Name</option>
+            <option value="3">Address</option>
+            <option value="4">City</option>
+            <option value="5">County</option>
+            <option value="6">State</option>
+            <option value="7">Zip</option>
+            <option value="8">Phone 1</option>
+            <option value="9">Phone 2</option>
+            <option value="10">Email</option>
+            <option value="11">Web</option>
         </select>
         {/* <input
         type="submit"

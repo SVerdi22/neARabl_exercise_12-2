@@ -11,3 +11,9 @@ export function addDataToStore(data){
         data: data
     }
 }
+export function updateFieldSelection(f){
+    return {
+        type: 'UPDATE_FIELD_SELECTION',
+        field: f
+    }
+}

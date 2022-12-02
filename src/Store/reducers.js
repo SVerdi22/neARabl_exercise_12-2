@@ -5,6 +5,8 @@ function rootReducer(state = {}, action) {
             return { ...state, testKey1: action.testArg1 }
         case 'ADD_DATA_TO_STORE':
             return { ...state, data: action.data }
+        case 'UPDATE_FIELD_SELECTION':
+            return { ...state, field: parseInt(action.field) }
         default: return state
     }
 }

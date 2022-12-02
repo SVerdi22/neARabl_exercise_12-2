@@ -7,7 +7,7 @@ class TargetValueSearchBar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            input: " "
+            input: ""
         };
     }
     handleChange = (event) => {
@@ -20,8 +20,20 @@ class TargetValueSearchBar extends Component {
         console.log("typed", this.state.input)
 
     }
-    submitInput = () => {
-        console.log("submitting", this.state.input)
+    submitInput = async () => {
+      var selectedField = await this.props.field
+      console.log("search", this.state.input, "in", selectedField)
+    this.search(selectedField, this.state.input)
+    }
+
+    search = (field, value) => {
+      console.log(value)
+      var data = this.props.data
+      console.log(data[105][field])
+      var resultRows = data.filter(row => row[field] === value)
+      console.log("result rows", resultRows)
+      var results = resultRows.map(r => `${r[0], r[1], r[field]}`)
+      console.log(results)
     }
     
   render() {
@@ -48,7 +60,8 @@ class TargetValueSearchBar extends Component {
 }
 function mapStateToProps(state) {
   return {
-    data: state.data
+    data: state.data,
+    field: state.field
   }
 }
 

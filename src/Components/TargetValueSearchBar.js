@@ -7,7 +7,8 @@ class TargetValueSearchBar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            input: ""
+            input: "",
+            results: []
         };
     }
     handleChange = (event) => {
@@ -32,8 +33,9 @@ class TargetValueSearchBar extends Component {
       console.log(data[105][field])
       var resultRows = data.filter(row => row[field] === value)
       console.log("result rows", resultRows)
-      var results = resultRows.map(r => `${r[0], r[1], r[field]}`)
-      console.log(results)
+      // var results = resultRows.map(r => `${r[0], r[1], r[field]}`)
+      // console.log(results)
+      this.setState({results: resultRows})
     }
     
   render() {
@@ -53,6 +55,7 @@ class TargetValueSearchBar extends Component {
         value="Submit"
         onClick={this.submitInput}
         />
+        <ul>{this.state.results}</ul>
         </>
 
     ) 

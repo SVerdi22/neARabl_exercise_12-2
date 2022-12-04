@@ -3,7 +3,9 @@ import Papa from 'papaparse';
 import { connect } from 'react-redux';
 import store from '../Store/store';
 import Flexbox from 'flexbox-react';
-
+import Container from 'react-bootstrap/Container';
+import Table from 'react-bootstrap/Table';
+import ResultsTable from './ResultsTable';
 class TargetValueSearchBar extends Component {
     constructor(props) {
         super(props);
@@ -55,9 +57,21 @@ class TargetValueSearchBar extends Component {
       justifyContent: "center"
       
     }
+    const container2 = {
+      width: "300px"
+    }
     return(
         <>
+        <div>
+
+        <Container
+          style={{
+            backgroundColor: 'green',
+            width: "200px"
+          }}>
         <h2>search field here</h2>
+        </Container>
+          </div>
         <input 
         type="text"
         placeholder="Search here"
@@ -93,15 +107,17 @@ neARabl.mp4" type="video/webm" />
           : null}
         {this.state.results.length > 1 || this.props.field == 1 || this.props.field > 2? <div style={styles}> 
         {this.props.field == 6 && this.state.results.length > 0? <div>{this.state.results.length} people in {this.state.results[0][6]}</div> : null}
-        <table>
-        <Flexbox>
-          <tbody>
-            {this.state.headerArr.map(val=> <td>{val}</td>)}
-            {this.state.results.map(row => <tr>{row.map(val => <td>{val}</td>)}</tr> )}
-          </tbody>
-        </Flexbox>
-        </table>
+
+          
+            <div>
+        {/* <Flexbox> */}
+        <ResultsTable headerVals = {this.state.headerArr} bodyData = {this.state.results.map(row => row)}/>
+            {/* {this.state.headerArr.map(val=> <td>{val}</td>)}
+            {this.state.results.map(row => <tr>{row.map(val => <td>{val}</td>)}</tr> )} */}
+
          </div> 
+        
+        </div>
          :null}
           
         </>

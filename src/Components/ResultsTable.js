@@ -30,32 +30,39 @@ const ResultsTable = (props) => {
 
           }
         `,
+            
         Cell: `
             font-color: black;
+
+            width: auto;
+        `,
+        Table: `
+        --data-table-library_grid-template-columns:  100% 100% 100% 100% minmax(300px, 1fr);
+        width: 3500px;
         `,
       };
     const theme = useTheme(THEME)
     return(
-        <div>
+        <div style={{overflow: "auto"}}>
     <h2>tttable here</h2>;
-    <Table data={data} theme ={theme}>
+    <Table data={data} theme ={theme} layout={{ horizontalScroll: true }}>
         {(tableList) => (
             <>
             <Header>
                 <HeaderRow>
                     {/* {header.map(val => <HeaderCell>{val}</HeaderCell>)} */}
-                <HeaderCell>First Name</HeaderCell>
-                <HeaderCell>Last Name</HeaderCell>
-                <HeaderCell>Company Name</HeaderCell>
-                <HeaderCell>Address</HeaderCell>
-                <HeaderCell>City</HeaderCell>
-                <HeaderCell>County</HeaderCell>
-                <HeaderCell>State</HeaderCell>
-                <HeaderCell>Zip</HeaderCell>
-                <HeaderCell>Phone1</HeaderCell>
-                <HeaderCell>Phone2</HeaderCell>
-                <HeaderCell>Email</HeaderCell>
-                <HeaderCell>Web</HeaderCell>
+                <HeaderCell style = {{textAlign: "center"}}>First Name</HeaderCell>
+                <HeaderCell style = {{textAlign: "center"}}>Last Name</HeaderCell>
+                <HeaderCell style = {{textAlign: "center"}}>Company Name</HeaderCell>
+                <HeaderCell style = {{textAlign: "center"}}>Address</HeaderCell>
+                <HeaderCell style = {{textAlign: "center"}}>City</HeaderCell>
+                <HeaderCell style = {{textAlign: "center"}}>County</HeaderCell>
+                <HeaderCell style = {{textAlign: "center"}}>State</HeaderCell>
+                <HeaderCell style = {{textAlign: "center"}}>Zip</HeaderCell>
+                <HeaderCell style = {{textAlign: "center"}}>Phone1</HeaderCell>
+                <HeaderCell style = {{textAlign: "center"}}>Phone2</HeaderCell>
+                <HeaderCell style = {{textAlign: "center"}}>Email</HeaderCell>
+                <HeaderCell style = {{textAlign: "center"}}>Web</HeaderCell>
                 </HeaderRow>
             </Header> 
         <Body>

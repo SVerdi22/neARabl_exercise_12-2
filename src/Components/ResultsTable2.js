@@ -5,59 +5,47 @@ import store from '../Store/store';
 import { Table, Header, HeaderRow, HeaderCell, Body, Row, Cell } from '@table-library/react-table-library/table' 
 import { useTheme } from '@table-library/react-table-library/theme';
 
-class ResultsTable extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-        };
-    }
+const ResultsTable2 = (props) => {
 
-  render() {
-    const header = {nodes: this.props.headerVals}
-    const body = this.props.bodyData
+    // console.log(inner)
+    const header = props.headerVals
+    const body = props.bodyData
     const data = {nodes: body};
-    const theme = useTheme(THEME)
-
     const THEME = {
         HeaderRow: `
           font-size: 14px;
       
           background-color: #eaf5fd;
+
         `,
         Row: `
           font-size: 14px;
-      
+                
           &:nth-child(odd) {
             background-color: #d2e9fb;
           }
       
           &:nth-child(even) {
             background-color: #eaf5fd;
+
           }
         `,
+        Cell: `
+            font-color: black;
+        `,
       };
-    // console.log(inner)
+    const theme = useTheme(THEME)
     return(
         <div>
-    <h2>Table here</h2>;
-    <Table data={data} theme = {theme}>
+    <h2>tttable here</h2>;
+    <Table data={data} theme ={theme}>
         {(tableList) => (
             <>
             <Header>
                 <HeaderRow>
                     {/* {header.map(val => <HeaderCell>{val}</HeaderCell>)} */}
-                <HeaderCell>header cell</HeaderCell>
-                <HeaderCell>header cell</HeaderCell>
-                <HeaderCell>header cell</HeaderCell>
-                <HeaderCell>header cell</HeaderCell>
-                <HeaderCell>header cell</HeaderCell>
-                <HeaderCell>header cell</HeaderCell>
-                <HeaderCell>header cell</HeaderCell>
-                <HeaderCell>header cell</HeaderCell>
-                <HeaderCell>header cell</HeaderCell>
-                <HeaderCell>header cell</HeaderCell>
-                <HeaderCell>header cell</HeaderCell>
-                <HeaderCell>header cell</HeaderCell>
+                <HeaderCell style = {{textAlign: "center"}}>{props.header}</HeaderCell>
+                <HeaderCell style = {{textAlign: "center"}}># of People</HeaderCell>
                 </HeaderRow>
             </Header> 
         <Body>
@@ -65,16 +53,6 @@ class ResultsTable extends Component {
                 <Row key={index} item={item}>
                 <Cell>{item[0]}</Cell>
                 <Cell>{item[1]}</Cell>
-                <Cell>{item[2]}</Cell>
-                <Cell>{item[3]}</Cell>
-                <Cell>{item[4]}</Cell>
-                <Cell>{item[5]}</Cell>
-                <Cell>{item[6]}</Cell>
-                <Cell>{item[7]}</Cell>
-                <Cell>{item[8]}</Cell>
-                <Cell>{item[9]}</Cell>
-                <Cell>{item[10]}</Cell>
-                <Cell>{item[11]}</Cell>
               </Row>
             ))}
           </Body>
@@ -88,12 +66,12 @@ class ResultsTable extends Component {
         </div>
     )
   }
-}
+
 // function mapStateToProps(state) {
 //   return {
 //     data: state.data
 //   }
 // }
 
-// export default connect(mapStateToProps)(ResultsTable);
-export default ResultsTable;
+// export default connect(mapStateToProps)(ResultsTable2);
+export default ResultsTable2;

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Papa from 'papaparse';
 import { connect } from 'react-redux';
 import store from '../Store/store';
-
+import ResultsTable2 from './ResultsTable2';
 class Visualization
  extends Component {
     constructor(props) {
@@ -64,8 +64,8 @@ class Visualization
             value="Sort by ZIP Code"
             onClick={this.sortByZip}
             />
-            {this.state.sortBy === "State"? <div>{this.state.stateCounts}</div> : null}
-            {this.state.sortBy === "Zip"? <div>{this.state.zipCounts}</div> : null}
+            {this.state.sortBy === "State"? <ResultsTable2 header={"State"} bodyData = {this.state.stateCounts.map(row => row)}/> : null}
+            {this.state.sortBy === "Zip"? <ResultsTable2 header={"Zip"} bodyData = {this.state.zipCounts.map(row => row)}/> : null}
 
     <h2>Visualization here</h2>;
         </div>

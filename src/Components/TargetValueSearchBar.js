@@ -89,7 +89,8 @@ class TargetValueSearchBar extends Component {
           src="https://raw.githubusercontent.com/jinchen003/Nearabl.Sample.Data/main/user.png"
           alt="user icon"
           />
-          {this.state.results.map(row => <tr>{row.map(val => <td>{val}</td>)}</tr> )}
+          {/* {this.state.results.map(row => <tr>{row.map(val => <td>{val}</td>)}</tr> )} */}
+          <ResultsTable headerVals = {this.state.headerArr} bodyData = {this.state.results.map(row => row)}/>
 
         </div>
         : null}
@@ -101,7 +102,8 @@ neARabl.mp4" type="video/mp4" />
  <source src="https://raw.githubusercontent.com/jinchen003/Nearabl.Sample.Data/main/
 neARabl.mp4" type="video/webm" />
             </video>
-            {this.state.results.map(row => <tr>{row.map(val => <td>{val}</td>)}</tr> )}
+            {/* {this.state.results.map(row => <tr>{row.map(val => <td>{val}</td>)}</tr> )} */}
+            <ResultsTable headerVals = {this.state.headerArr} bodyData = {this.state.results.map(row => row)}/>
 
           </div>
           : null}

@@ -30,6 +30,11 @@ class TargetValueSearchBar extends Component {
       console.log("search", this.state.input, "in", selectedField)
     this.search(selectedField, this.state.input)
     }
+    showAll = async () => {
+      var data = this.props.data
+      await this.setState({headerArr: data[0]})
+      this.setState({results: data})
+        }
 
     search = async(field, value) => {
       console.log(value)
@@ -82,6 +87,11 @@ class TargetValueSearchBar extends Component {
         type="submit"
         value="Submit"
         onClick={this.submitInput}
+        />
+        <input
+        type="submit"
+        value="Show Full Dataset"
+        onClick={this.showAll}
         />
         {/* <ul>{this.state.results}</ul> */}
         {this.state.results.length == 1 && this.props.field == 0? <div>

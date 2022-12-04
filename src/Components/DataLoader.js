@@ -4,11 +4,13 @@ import { connect } from 'react-redux';
 import { updateStoreTest1 } from '../Store/actions';
 import { addDataToStore } from '../Store/actions';
 import store from '../Store/store';
+import ResultsTable from './ResultsTable';
 class DataLoader extends Component {
     constructor(props) {
         super(props);
-        // this.state = {
-        // };
+        this.state = {
+            results: []
+        };
         // this.updateStateTest()
         this.getDataSet()
     }
@@ -17,13 +19,15 @@ class DataLoader extends Component {
         var dataOuterArray;
         var dataArray;
         const dataSet = 'https://raw.githubusercontent.com/jinchen003/Nearabl.Sample.Data/main/us-500.csv'
-        
+        var dataNoFirstRow
         fetch(dataSet)
         .then((response) => response.text())
         .then((data) => dataOuterArray = Papa.parse(data))
         .then(() => dataArray = dataOuterArray.data)
         // .then(() => console.log(dataArray[1]))
         .then(() => this.props.dispatch(addDataToStore(dataArray)))
+        .then(() => dataArray.shift())
+        .then(() => this.setState({results: dataArray}))
     }
 
     // updateStateTest = async (val) => {
@@ -38,7 +42,14 @@ class DataLoader extends Component {
         // const inner = this.props
     // console.log(store.getState())
     // console.log(inner)
-    return <h2>data loader</h2>;
+    return (
+        <div>
+
+    <h2>data loader</h2>
+    {/* <ResultsTable bodyData = {this.state.results.map(row => row)}/> */}
+        </div>
+
+    );
   }
 }
 function mapStateToProps(state) {

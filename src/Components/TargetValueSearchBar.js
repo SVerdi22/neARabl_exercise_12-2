@@ -6,6 +6,7 @@ import Flexbox from 'flexbox-react';
 import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
 import ResultsTable from './ResultsTable';
+import OneResultTable from './OneResultTable';
 class TargetValueSearchBar extends Component {
     constructor(props) {
         super(props);
@@ -69,13 +70,7 @@ class TargetValueSearchBar extends Component {
         <>
         <div>
 
-        <Container
-          style={{
-            backgroundColor: 'green',
-            width: "200px"
-          }}>
-        <h2>search field here</h2>
-        </Container>
+        
           </div>
         <input 
         type="text"
@@ -88,32 +83,36 @@ class TargetValueSearchBar extends Component {
         value="Submit"
         onClick={this.submitInput}
         />
-        <input
-        type="submit"
-        value="Show Full Dataset"
-        onClick={this.showAll}
-        />
+          <input
+          type="submit"
+          value="Show Full Dataset"
+          onClick={this.showAll}
+          />
         {/* <ul>{this.state.results}</ul> */}
         {this.state.results.length == 1 && this.props.field == 0? <div>
+          {/* <ResultsTable bodyData = {this.state.results.map(row => row)}/> */}
+          <OneResultTable bodyData = {this.state.results.map(row => row)}/>
           <img
           src="https://raw.githubusercontent.com/jinchen003/Nearabl.Sample.Data/main/user.png"
           alt="user icon"
+          style={{width: "200px", height: "200px"}}
           />
           {/* {this.state.results.map(row => <tr>{row.map(val => <td>{val}</td>)}</tr> )} */}
-          <ResultsTable headerVals = {this.state.headerArr} bodyData = {this.state.results.map(row => row)}/>
 
         </div>
         : null}
         {this.state.results.length == 1 && this.props.field == 2? <div>
-          <h2>company video here</h2>
-          <video controls width="100%">
+          
+            {/* <ResultsTable headerVals = {this.state.headerArr} bodyData = {this.state.results.map(row => row)}/> */}
+            <OneResultTable bodyData = {this.state.results.map(row => row)}/>
+
+ 
+          <video controls width="50%">
           <source src="https://raw.githubusercontent.com/jinchen003/Nearabl.Sample.Data/main/
 neARabl.mp4" type="video/mp4" />
  <source src="https://raw.githubusercontent.com/jinchen003/Nearabl.Sample.Data/main/
 neARabl.mp4" type="video/webm" />
             </video>
-            {/* {this.state.results.map(row => <tr>{row.map(val => <td>{val}</td>)}</tr> )} */}
-            <ResultsTable headerVals = {this.state.headerArr} bodyData = {this.state.results.map(row => row)}/>
 
           </div>
           : null}

@@ -45,7 +45,7 @@ class DataLoader extends Component {
     return (
         <div>
 
-    <h2>data loader</h2>
+    {/* <h2>data loader</h2> */}
     {/* <ResultsTable bodyData = {this.state.results.map(row => row)}/> */}
         </div>
 

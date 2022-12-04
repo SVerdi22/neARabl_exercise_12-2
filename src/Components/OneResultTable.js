@@ -5,9 +5,8 @@ import store from '../Store/store';
 import { Table, Header, HeaderRow, HeaderCell, Body, Row, Cell } from '@table-library/react-table-library/table' 
 import { useTheme } from '@table-library/react-table-library/theme';
 
-const ResultsTable2 = (props) => {
+const OneResultTable = (props) => {
 
-    // console.log(inner)
     const header = props.headerVals
     const body = props.bodyData
     const data = {nodes: body};
@@ -43,14 +42,25 @@ const ResultsTable2 = (props) => {
             <Header>
                 <HeaderRow>
                     {/* {header.map(val => <HeaderCell>{val}</HeaderCell>)} */}
-                <HeaderCell style = {{textAlign: "center"}}>{props.header}</HeaderCell>
-                <HeaderCell style = {{textAlign: "center"}}># of People</HeaderCell>
+                {/* <HeaderCell style = {{textAlign: "center"}}>{props.header}</HeaderCell>
+                <HeaderCell style = {{textAlign: "center"}}># of People</HeaderCell> */}
                 </HeaderRow>
             </Header> 
         <Body>
             {tableList.map((item, index) => (
                 <Row key={index} item={item}>
                 <Cell>{item[0]}</Cell>
+                <Cell>{item[1]}</Cell>
+                <Cell>{item[2]}</Cell>
+                <Cell>{item[3]}</Cell>
+                <Cell>{item[4]}</Cell>
+                <Cell>{item[5]}</Cell>
+                <Cell>{item[6]}</Cell>
+                <Cell>{item[7]}</Cell>
+                <Cell>{item[8]}</Cell>
+                <Cell>{item[9]}</Cell>
+                <Cell>{item[10]}</Cell>
+                <Cell>{item[11]}</Cell>
                 <Cell>{item[1]}</Cell>
               </Row>
             ))}
@@ -66,11 +76,4 @@ const ResultsTable2 = (props) => {
     )
   }
 
-// function mapStateToProps(state) {
-//   return {
-//     data: state.data
-//   }
-// }
-
-// export default connect(mapStateToProps)(ResultsTable2);
-export default ResultsTable2;
+export default OneResultTable;

@@ -40,12 +40,10 @@ class Visualization
         this.setState({zipCounts: zipCodesWithCounts})
     }
     sortByState = () => {
-        console.log("sort by state")
         this.setState({sortBy: "State"})
         this.createStateTable()
     }
     sortByZip = () => {
-        console.log("sort by Zip")
         this.setState({sortBy: "Zip"})
         this.createZipTable()
     }
@@ -56,18 +54,17 @@ class Visualization
         <div>
             <input 
             type="submit"
-            value="Sort by state"
+            value="# of people by state"
             onClick={this.sortByState}
             />
             <input 
             type="submit"
-            value="Sort by ZIP Code"
+            value="# of people by ZIP Code"
             onClick={this.sortByZip}
             />
             {this.state.sortBy === "State"? <ResultsTable2 header={"State"} bodyData = {this.state.stateCounts.map(row => row)}/> : null}
             {this.state.sortBy === "Zip"? <ResultsTable2 header={"Zip"} bodyData = {this.state.zipCounts.map(row => row)}/> : null}
 
-    <h2>Visualization here</h2>;
         </div>
     )
 

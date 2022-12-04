@@ -28,7 +28,6 @@ class SearchFieldDropdown extends Component {
     // console.log(inner)
     return (
         <>
-        <h2>dropdown here</h2>
         <select value={this.state.value} onChange={this.handleChange}>
             <option disabled={true} value="">select search field</option>
             <option value="0">First Name</option>

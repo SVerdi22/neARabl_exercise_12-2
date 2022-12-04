@@ -44,7 +44,6 @@ const ResultsTable = (props) => {
     const theme = useTheme(THEME)
     return(
         <div style={{overflow: "auto"}}>
-    <h2>tttable here</h2>;
     <Table data={data} theme ={theme} layout={{ horizontalScroll: true }}>
         {(tableList) => (
             <>

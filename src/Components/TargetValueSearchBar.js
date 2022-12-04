@@ -18,17 +18,13 @@ class TargetValueSearchBar extends Component {
     }
     handleChange = (event) => {
         event.preventDefault();
-    // this.setState({input: event.target.value})
     this.setSearchInput(event.target.value)
 }
     setSearchInput = async (input) => {
         await this.setState({input: input})
-        console.log("typed", this.state.input)
-
     }
     submitInput = async () => {
       var selectedField = await this.props.field
-      console.log("search", this.state.input, "in", selectedField)
     this.search(selectedField, this.state.input)
     }
     showAll = async () => {
@@ -37,25 +33,17 @@ class TargetValueSearchBar extends Component {
       this.setState({results: data})
         }
 
+        // filter data to return arrays that match field and value selections, then set to component state
     search = async(field, value) => {
-      console.log(value)
       var data = this.props.data
       await this.setState({headerArr: data[0]})
-      console.log(data[105][field])
       var resultRows = data.filter(row => row[field] === value)
-      console.log("result rows", resultRows)
-      // var results = resultRows.map(r => `${r[0], r[1], r[field]}`)
-      // console.log(results)
-    
       this.setState({results: resultRows})
     }
     
   render() {
-    // const headerRow = this.props.data[0]
-    // console.log("data in render", headerRow)
-    console.log(this.state)
+
     const styles = {
-      // border: "1px solid black",
       width: "75%",
       marginRight: "500px",
       marginBottom: "200px",
@@ -72,41 +60,44 @@ class TargetValueSearchBar extends Component {
 
         
           </div>
+ 
         <input 
         type="text"
-        placeholder="Search here"
+        placeholder="Search"
         onChange={this.handleChange}
         value={this.state.input}
         />
+ 
         <input
         type="submit"
         value="Submit"
         onClick={this.submitInput}
         />
+  
           <input
           type="submit"
           value="Show Full Dataset"
           onClick={this.showAll}
           />
-        {/* <ul>{this.state.results}</ul> */}
+
+          {/* condition for part 2b of task
+           if there is only one response, and the selected search field was first_name, display user icon, return OneResultTable component and pass search result as bodyData prop  */}
         {this.state.results.length == 1 && this.props.field == 0? <div>
-          {/* <ResultsTable bodyData = {this.state.results.map(row => row)}/> */}
           <OneResultTable bodyData = {this.state.results.map(row => row)}/>
           <img
           src="https://raw.githubusercontent.com/jinchen003/Nearabl.Sample.Data/main/user.png"
           alt="user icon"
           style={{width: "200px", height: "200px"}}
           />
-          {/* {this.state.results.map(row => <tr>{row.map(val => <td>{val}</td>)}</tr> )} */}
 
         </div>
         : null}
+         {/* condition for part 2c of task
+           if there is only one response, and the selected search field was company_name, display company video, return OneResultTable component and pass search result as bodyData prop  */}
         {this.state.results.length == 1 && this.props.field == 2? <div>
           
-            {/* <ResultsTable headerVals = {this.state.headerArr} bodyData = {this.state.results.map(row => row)}/> */}
             <OneResultTable bodyData = {this.state.results.map(row => row)}/>
 
- 
           <video controls width="50%">
           <source src="https://raw.githubusercontent.com/jinchen003/Nearabl.Sample.Data/main/
 neARabl.mp4" type="video/mp4" />
@@ -116,17 +107,21 @@ neARabl.mp4" type="video/webm" />
 
           </div>
           : null}
+
+           {/* condition for part 2a which excludes cases for 2b and 2c of task
+           if there is more than one response, or the selected search field was anything other than first_name or company_name, move to inner conditional
+              */}
         {this.state.results.length > 1 || this.props.field == 1 || this.props.field > 2? <div style={styles}> 
+        
+        {/* if search field is "state", show number of results  */}
         {this.props.field == 6 && this.state.results.length > 0? <div>{this.state.results.length} people in {this.state.results[0][6]}</div> : null}
 
-          
-            <div>
-        {/* <Flexbox> */}
+        {/* if there are any search results, return ResultsTable component and pass search result as headerVals and bodyData props */}
+           {this.state.results.length > 0? <div>
         <ResultsTable headerVals = {this.state.headerArr} bodyData = {this.state.results.map(row => row)}/>
-            {/* {this.state.headerArr.map(val=> <td>{val}</td>)}
-            {this.state.results.map(row => <tr>{row.map(val => <td>{val}</td>)}</tr> )} */}
-
+           
          </div> 
+            :null} 
         
         </div>
          :null}
@@ -136,6 +131,7 @@ neARabl.mp4" type="video/webm" />
     ) 
   }
 }
+
 function mapStateToProps(state) {
   return {
     data: state.data,

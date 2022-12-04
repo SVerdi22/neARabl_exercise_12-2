@@ -7,7 +7,6 @@ import { useTheme } from '@table-library/react-table-library/theme';
 
 const ResultsTable2 = (props) => {
 
-    // console.log(inner)
     const header = props.headerVals
     const body = props.bodyData
     const data = {nodes: body};
@@ -37,6 +36,7 @@ const ResultsTable2 = (props) => {
     const theme = useTheme(THEME)
     return(
         <div>
+            {/* render 2-column table to show people per state / zip code depending on props */}
     <Table data={data} theme ={theme}>
         {(tableList) => (
             <>
@@ -58,19 +58,10 @@ const ResultsTable2 = (props) => {
             </>
             )}
     </Table>
-    {/* <h2>header: {header}</h2> */}
 
-    {/* <h2>body: {body}</h2> */}
 
         </div>
     )
   }
 
-// function mapStateToProps(state) {
-//   return {
-//     data: state.data
-//   }
-// }
-
-// export default connect(mapStateToProps)(ResultsTable2);
 export default ResultsTable2;

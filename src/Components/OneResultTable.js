@@ -6,10 +6,13 @@ import { Table, Header, HeaderRow, HeaderCell, Body, Row, Cell } from '@table-li
 import { useTheme } from '@table-library/react-table-library/theme';
 
 const OneResultTable = (props) => {
-
+    // get table values from props
     const header = props.headerVals
     const body = props.bodyData
+    // format data to usable object for table
     const data = {nodes: body};
+
+    //format table
     const THEME = {
         HeaderRow: `
           font-size: 14px;
@@ -37,40 +40,20 @@ const OneResultTable = (props) => {
     return(
         <div>
     <Table data={data} theme ={theme}>
+        {/* map through data from props to create table */}
         {(tableList) => (
             <>
-            <Header>
-                <HeaderRow>
-                    {/* {header.map(val => <HeaderCell>{val}</HeaderCell>)} */}
-                {/* <HeaderCell style = {{textAlign: "center"}}>{props.header}</HeaderCell>
-                <HeaderCell style = {{textAlign: "center"}}># of People</HeaderCell> */}
-                </HeaderRow>
-            </Header> 
         <Body>
             {tableList.map((item, index) => (
                 <Row key={index} item={item}>
-                <Cell>{item[0]}</Cell>
-                <Cell>{item[1]}</Cell>
-                <Cell>{item[2]}</Cell>
-                <Cell>{item[3]}</Cell>
-                <Cell>{item[4]}</Cell>
-                <Cell>{item[5]}</Cell>
-                <Cell>{item[6]}</Cell>
-                <Cell>{item[7]}</Cell>
-                <Cell>{item[8]}</Cell>
-                <Cell>{item[9]}</Cell>
-                <Cell>{item[10]}</Cell>
-                <Cell>{item[11]}</Cell>
-                <Cell>{item[1]}</Cell>
+                    {/* map through item array and return cell for each element in array */}
+                    {item.map(ele => <Cell>{ele}</Cell>)}
               </Row>
             ))}
           </Body>
             </>
             )}
     </Table>
-    {/* <h2>header: {header}</h2> */}
-
-    {/* <h2>body: {body}</h2> */}
 
         </div>
     )

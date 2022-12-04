@@ -6,11 +6,12 @@ import { Table, Header, HeaderRow, HeaderCell, Body, Row, Cell } from '@table-li
 import { useTheme } from '@table-library/react-table-library/theme';
 
 const ResultsTable = (props) => {
-
-    // console.log(inner)
+    // get data from props
     const header = props.headerVals
     const body = props.bodyData
     const data = {nodes: body};
+
+    // format table
     const THEME = {
         HeaderRow: `
           font-size: 14px;
@@ -42,14 +43,17 @@ const ResultsTable = (props) => {
         `,
       };
     const theme = useTheme(THEME)
+
     return(
+
         <div style={{overflow: "auto"}}>
     <Table data={data} theme ={theme} layout={{ horizontalScroll: true }}>
         {(tableList) => (
             <>
             <Header>
                 <HeaderRow>
-                    {/* {header.map(val => <HeaderCell>{val}</HeaderCell>)} */}
+                    
+                {/* //hard coded header values to make them more readable */}
                 <HeaderCell style = {{textAlign: "center"}}>First Name</HeaderCell>
                 <HeaderCell style = {{textAlign: "center"}}>Last Name</HeaderCell>
                 <HeaderCell style = {{textAlign: "center"}}>Company Name</HeaderCell>
@@ -65,39 +69,28 @@ const ResultsTable = (props) => {
                 </HeaderRow>
             </Header> 
         <Body>
+            {/* map through nested array of data, take each inner array and map through that to create row of cells  */}
             {tableList.map((item, index) => (
                 <Row key={index} item={item}>
-                <Cell>{item[0]}</Cell>
-                <Cell>{item[1]}</Cell>
-                <Cell>{item[2]}</Cell>
-                <Cell>{item[3]}</Cell>
-                <Cell>{item[4]}</Cell>
-                <Cell>{item[5]}</Cell>
-                <Cell>{item[6]}</Cell>
-                <Cell>{item[7]}</Cell>
-                <Cell>{item[8]}</Cell>
-                <Cell>{item[9]}</Cell>
-                <Cell>{item[10]}</Cell>
-                <Cell>{item[11]}</Cell>
+                      {item.map(ele => <Cell>{ele}</Cell>)}
               </Row>
             ))}
           </Body>
             </>
             )}
     </Table>
-    {/* <h2>header: {header}</h2> */}
 
-    {/* <h2>body: {body}</h2> */}
 
         </div>
     )
   }
 
-// function mapStateToProps(state) {
-//   return {
-//     data: state.data
-//   }
-// }
+//   make app state accessible with props
+function mapStateToProps(state) {
+  return {
+    data: state.data,
+    headerVals: state.headerVals
+  }
+}
 
-// export default connect(mapStateToProps)(ResultsTable);
-export default ResultsTable;
+export default connect(mapStateToProps)(ResultsTable);

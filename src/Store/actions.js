@@ -17,3 +17,9 @@ export function updateFieldSelection(f){
         field: f
     }
 }
+export function updateCurrentlyDisplaying(f){
+    return {
+        type: 'UPDATE_CURRENTLY_DISPLAYING',
+        currentlySelected: f
+    }
+}

@@ -7,6 +7,8 @@ function rootReducer(state = {}, action) {
             return { ...state, data: action.data }
         case 'UPDATE_FIELD_SELECTION':
             return { ...state, field: parseInt(action.field) }
+        case 'UPDATE_CURRENTLY_DISPLAYING':
+            return { ...state, currentlySelected: parseInt(action.currentlySelected) }    
         default: return state
     }
 }

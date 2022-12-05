@@ -7,6 +7,8 @@ import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
 import ResultsTable from './ResultsTable';
 import OneResultTable from './OneResultTable';
+import { updateCurrentlyDisplaying } from '../Store/actions';
+import Visualization from './Visualization';
 class TargetValueSearchBar extends Component {
     constructor(props) {
         super(props);
@@ -26,6 +28,7 @@ class TargetValueSearchBar extends Component {
     submitInput = async () => {
       var selectedField = await this.props.field
     this.search(selectedField, this.state.input)
+
     }
     showAll = async () => {
       var data = this.props.data
@@ -38,7 +41,10 @@ class TargetValueSearchBar extends Component {
       var data = this.props.data
       await this.setState({headerArr: data[0]})
       var resultRows = data.filter(row => row[field] === value)
+      await this.props.dispatch(updateCurrentlyDisplaying(field))
+      console.log("selected field should be here", this.props)
       this.setState({results: resultRows})
+
     }
     
   render() {
@@ -58,7 +64,6 @@ class TargetValueSearchBar extends Component {
         <>
         <div>
 
-        
           </div>
  
         <input 
@@ -73,7 +78,8 @@ class TargetValueSearchBar extends Component {
         value="Submit"
         onClick={this.submitInput}
         />
-  
+          <Visualization />
+
           <input
           type="submit"
           value="Show Full Dataset"
@@ -82,7 +88,7 @@ class TargetValueSearchBar extends Component {
 
           {/* condition for part 2b of task
            if there is only one response, and the selected search field was first_name, display user icon, return OneResultTable component and pass search result as bodyData prop  */}
-        {this.state.results.length == 1 && this.props.field == 0? <div>
+        {this.state.results.length == 1 && this.props.field == 0 && this.props.currentlySelected == 0? <div>
           <OneResultTable bodyData = {this.state.results.map(row => row)}/>
           <img
           src="https://raw.githubusercontent.com/jinchen003/Nearabl.Sample.Data/main/user.png"
@@ -94,7 +100,7 @@ class TargetValueSearchBar extends Component {
         : null}
          {/* condition for part 2c of task
            if there is only one response, and the selected search field was company_name, display company video, return OneResultTable component and pass search result as bodyData prop  */}
-        {this.state.results.length == 1 && this.props.field == 2? <div>
+        {this.state.results.length == 1 && this.props.field == 2 && this.props.currentlySelected == 2?  <div>
           
             <OneResultTable bodyData = {this.state.results.map(row => row)}/>
 
@@ -114,10 +120,10 @@ neARabl.mp4" type="video/webm" />
         {this.state.results.length > 1 || this.props.field == 1 || this.props.field > 2? <div style={styles}> 
         
         {/* if search field is "state", show number of results  */}
-        {this.props.field == 6 && this.state.results.length > 0? <div>{this.state.results.length} people in {this.state.results[0][6]}</div> : null}
+        {this.props.field == 6 && this.state.results.length > 0 && this.props.currentlySelected == 6? <div>{this.state.results.length} people in {this.state.results[0][6]}</div> : null}
 
         {/* if there are any search results, return ResultsTable component and pass search result as headerVals and bodyData props */}
-           {this.state.results.length > 0? <div>
+           {this.state.results.length > 0 && this.props.currentlySelected == this.props.field? <div>
         <ResultsTable headerVals = {this.state.headerArr} bodyData = {this.state.results.map(row => row)}/>
            
          </div> 
@@ -135,7 +141,8 @@ neARabl.mp4" type="video/webm" />
 function mapStateToProps(state) {
   return {
     data: state.data,
-    field: state.field
+    field: state.field,
+    currentlySelected: state.currentlySelected
   }
 }
 

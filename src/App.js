@@ -13,7 +13,6 @@ function App() {
         <DataLoader />
         <SearchFieldDropdown />
         <TargetValueSearchBar />
-        <Visualization />
       </header>
     </div>
   );
